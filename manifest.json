@@ -1,10 +1,18 @@
 {
   "manifest_version": 3,
-  "name": "Gemini Title Fixer",
-  "version": "1.0",
-  "description": "Forces Gemini tabs to show the actual conversation title.",
-  "icons": {
-    "48": "icon.png"
+  "name": "Gemini Station",
+  "version": "1.4",
+  "description": "Native Context Menu & New Tab Redirect",
+  "icons": { "48": "icon.png" },
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
+  "permissions": [
+    "contextMenus",
+    "storage"
+  ],
+  "background": {
+    "service_worker": "background.js"
   },
   "content_scripts": [
     {
