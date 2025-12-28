@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "Gemini Title Fixer",
+  "version": "1.0",
+  "description": "Forces Gemini tabs to show the actual conversation title.",
+  "icons": {
+    "48": "icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://gemini.google.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

@@ -1,53 +1,54 @@
-# Gemini Station
+# Gemini Station 🚀
 
-A dedicated, persistent desktop workspace for Google Gemini.
+**Gemini Station** is a lightweight, "Native-Like" environment for Google Gemini, built on top of Microsoft Edge (or Chrome) profiles.
 
-## The Problem
-Browser clutter and context switching kill developer focus. Keeping your AI assistant in a browser tab among dozens of others leads to distraction and lost context.
+It solves the two biggest problems with using Gemini in a standard browser:
+1.  **"New Chat" Fatigue:** Fixes generic tab titles so you can actually find your "Python Help" or "Dinner Recipe" tabs.
+2.  **Context Switching:** Isolates your AI work from your daily browsing (email, social media) for deep work.
 
-## The Solution
-**Gemini Station** is a dedicated, lightweight (Python-based) AI cockpit. It provides a focused environment for interacting with Google Gemini, separate from your main browser.
+![Gemini Station Screenshot](assets/screenshot.png)
 
-![Gemini Station Interface](assets/screenshot.png)
+## Why not a Desktop App?
+We tried building a custom wrapper (Electron/PyQt), but Google's security AI eventually blocks third-party login attempts. 
 
-## Key Features
-- **Persistent Login**: Maintains your session so you don't have to log in every time.
-- **Custom User Agents**: Optimized for the best Gemini experience.
-- **Lightweight**: Built with Python and PyQt6, avoiding the overhead of Electron.
-- **Distraction-Free**: Clean interface with custom context menus, tab management, and auto-hiding of the "My Stuff" sidebar for pure focus.
-- **Session Restoration**: Remembers your open tabs and active chat.
+**Gemini Station** uses a dedicated Browser Profile, which means:
+* ✅ **Zero Login Issues:** You are using a real, native browser.
+* ✅ **Extensions Support:** Grammarly, 1Password, and other tools just work.
+* ✅ **Zero Maintenance:** No code to update when Google changes their CSS.
 
-## Installation
+## Included Tools
 
-1.  **Clone the repository:**
-    ```bash
-    git clone https://github.com/rajeshkumarblr/gemini_station.git
-    cd gemini_station
-    ```
+### 🧩 Gemini Title Fixer (Extension)
+Gemini tabs usually just say "Gemini" or "New chat". This repo includes a custom unpacked extension that:
+* Scrapes the sidebar for the *actual* conversation topic.
+* Renames the browser tab instantly.
+* Makes managing 10+ open chats possible.
 
-2.  **Install dependencies:**
-    ```bash
-    pip install -r requirements.txt
-    ```
+## Setup Guide
 
-3.  **Run the application:**
-    ```bash
-    python main.py
-    ```
+### Step 1: The "Station" (Profile Setup)
+1.  Open **Microsoft Edge** (or Chrome).
+2.  Click your Profile Icon (top left) -> **Add Profile** -> **Add**.
+3.  Name it **"Gemini Station"**.
+4.  (Optional) Pick a dedicated icon (or the Gemini logo).
+5.  **Pin it to Taskbar:** Right-click the new browser icon in your taskbar -> Pin to taskbar.
 
-## Requirements
-- Python 3.8+
-- PyQt6
-- PyQt6-WebEngine
+### Step 2: The "Intelligence" (Install Extension)
+1.  Download or Clone this repository to a folder (e.g., `Documents/GeminiStation`).
+2.  In your new Gemini Station browser window, go to:
+    * **Edge:** `edge://extensions`
+    * **Chrome:** `chrome://extensions`
+3.  Toggle **Developer Mode** (usually a switch in the corner).
+4.  Click **Load Unpacked**.
+5.  Select the folder containing `manifest.json` from this repo.
 
-## Building the Executable
+### Step 3: The "App Feel" (Vertical Tabs)
+For the best experience, we recommend:
+1.  **Turn on Vertical Tabs** (Edge only): Right-click the tab bar -> "Turn on vertical tabs".
+2.  **Hide the Address Bar** (Optional): Use "Focus Mode" if your browser supports it.
 
-To build a standalone Windows executable (`.exe`):
+## How it Works
+The included `content.js` script runs only on `gemini.google.com`. It intelligently looks at the active conversation sidebar and updates the HTML document title, which updates the tab name. It includes logic to ignore generic statuses like "Updates" or "Help".
 
-1.  Open PowerShell in the project directory.
-2.  Run the build script:
-    ```powershell
-    .\build.ps1
-    ```
-3.  The executable will be created at `dist/windows/GeminiStation.exe`.
-
+## License
+MIT License. Feel free to fork and improve the scraping logic!
