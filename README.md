@@ -1,55 +1,64 @@
 # Gemini Station 🚀
 
-**Gemini Station** is a lightweight, "Native-Like" environment for Google Gemini, built on top of Microsoft Edge (or Chrome) profiles.
+**Gemini Station** is a lightweight, local Chrome/Edge extension that fixes "New Chat" tab fatigue.
 
-It solves the two biggest problems with using Gemini in a standard browser:
-1.  **"New Chat" Fatigue:** Fixes generic tab titles so you can actually find your "Python Help" or "Dinner Recipe" tabs.
-2.  **Context Switching:** Isolates your AI work from your daily browsing (email, social media) for deep work.
+It solves the biggest annoyance with using Google Gemini for coding or deep work: **generic browser tabs.**
 
-![Gemini Station Screenshot](assets/screenshot.png)
+### The Problem
+When you have 5+ tabs open, they all look like this:
+![Messy Tabs](assets/screenshot_without_ext.png)
 
-## Why not a Desktop App?
-We tried building a custom wrapper (Electron/PyQt), but Google's security AI eventually blocks third-party login attempts. 
+### The Solution (Gemini Station)
+This extension intelligently scrapes the conversation topic and renames your tabs instantly:
+![Clean Tabs](assets/screenshot.png)
 
-**Gemini Station** uses a dedicated Browser Profile, which means:
-* ✅ **Zero Login Issues:** You are using a real, native browser.
-* ✅ **Extensions Support:** Grammarly, 1Password, and other tools just work.
-* ✅ **Zero Maintenance:** No code to update when Google changes their CSS.
+---
 
-## Included Tools
+## ✨ Features
 
-### 🧩 Gemini Title Fixer (Extension)
-Gemini tabs usually just say "Gemini" or "New chat". This repo includes a custom unpacked extension that:
-* Scrapes the sidebar for the *actual* conversation topic.
-* Renames the browser tab instantly.
-* Makes managing 10+ open chats possible.
+* **Auto-Rename Tabs:** Automatically updates the browser tab title to match the active conversation in the sidebar (e.g., "Python Regex Help" instead of "Gemini").
+* **Context Menu Fix:** Adds a right-click **"Open Chat in New Tab"** option to the sidebar (fixing the native UI which fights against new tabs).
+* **Zero-Config:** Just install it, and it works.
 
-## Setup Guide
+## 📦 Installation (Developer Mode)
 
-### Step 1: The "Station" (Profile Setup)
-1.  Open **Microsoft Edge** (or Chrome).
-2.  Click your Profile Icon (top left) -> **Add Profile** -> **Add**.
-3.  Name it **"Gemini Station"**.
-4.  (Optional) Pick a dedicated icon (or the Gemini logo).
-5.  **Pin it to Taskbar:** Right-click the new browser icon in your taskbar -> Pin to taskbar.
+Since this is a "Daily Driver" tool for developers, it's distributed as an **Unpacked Extension** (Manifest V3).
 
-### Step 2: The "Intelligence" (Install Extension)
-1.  Download or Clone this repository to a folder (e.g., `Documents/GeminiStation`).
-2.  In your new Gemini Station browser window, go to:
-    * **Edge:** `edge://extensions`
+1.  **Download** or **Clone** this repository to a folder.
+2.  Open your browser's extensions page:
     * **Chrome:** `chrome://extensions`
-3.  Toggle **Developer Mode** (usually a switch in the corner).
+    * **Edge:** `edge://extensions`
+3.  Toggle **Developer Mode** (top right corner).
 4.  Click **Load Unpacked**.
-5.  Select the folder containing `manifest.json` from this repo.
+5.  Select the folder containing the `manifest.json` file.
 
+*Done! Open Gemini and refresh your tabs.*
 
+---
 
-## How it Works
-The included `content.js` script runs only on `gemini.google.com`. It intelligently looks at the active conversation sidebar and updates the HTML document title, which updates the tab name. It includes logic to ignore generic statuses like "Updates" or "Help".
+## 🛠 How it Works
+
+The logic is simple and transparent (see `content.js`):
+1.  **Observer:** The script monitors the page for the active conversation ID.
+2.  **Scraper:** It reads the conversation title from the sidebar DOM.
+3.  **Syncer:** It updates `document.title` if it detects a generic title like "Gemini" or "New Chat."
+4.  **Sanitizer:** It ignores status updates like "Updates" or "Help" to keep your tabs clean.
 
 ## 🔒 Privacy & Security
-*   **Local Only:** This extension is 100% local. No data is sent to any server.
-*   **Open Source:** You can audit the code to see exactly what it does.
+
+* **100% Local:** No data is sent to any server. No analytics. No tracking.
+* **Minimal Permissions:** Only requests `storage` (for settings) and `contextMenus`.
+* **Open Source:** You can audit the ~80 lines of code in `content.js` yourself.
+
+## 💡 Pro Tip: The "App" Experience
+
+If you want a native app-like experience without the bloat of Electron:
+
+1.  Create a dedicated **Chrome/Edge Profile** named "Gemini".
+2.  Install this extension in that profile.
+3.  **Pin** that browser profile to your taskbar.
+
+Now you have a dedicated "Gemini OS" that handles multiple tabs correctly!
 
 ## License
 MIT License. Feel free to fork and improve the scraping logic!
