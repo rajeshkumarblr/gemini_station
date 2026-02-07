@@ -6,7 +6,7 @@ It solves the biggest annoyance with using Google Gemini for coding or deep work
 
 ### The Problem
 When you have 5+ tabs open, they all look like this:
-![Messy Tabs](assets/screenshot_without_ext.png)
+Messy Tabs](assets/screenshot_without_ext.png)
 
 ### The Solution (Gemini Station)
 This extension intelligently scrapes the conversation topic and renames your tabs instantly:
