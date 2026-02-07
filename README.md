@@ -42,13 +42,14 @@ Gemini tabs usually just say "Gemini" or "New chat". This repo includes a custom
 4.  Click **Load Unpacked**.
 5.  Select the folder containing `manifest.json` from this repo.
 
-### Step 3: The "App Feel" (Vertical Tabs)
-For the best experience, we recommend:
-1.  **Turn on Vertical Tabs** (Edge only): Right-click the tab bar -> "Turn on vertical tabs".
-2.  **Hide the Address Bar** (Optional): Use "Focus Mode" if your browser supports it.
+
 
 ## How it Works
 The included `content.js` script runs only on `gemini.google.com`. It intelligently looks at the active conversation sidebar and updates the HTML document title, which updates the tab name. It includes logic to ignore generic statuses like "Updates" or "Help".
+
+## 🔒 Privacy & Security
+*   **Local Only:** This extension is 100% local. No data is sent to any server.
+*   **Open Source:** You can audit the code to see exactly what it does.
 
 ## License
 MIT License. Feel free to fork and improve the scraping logic!
